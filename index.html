@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài tập JS buổi 18</title>
+    <link
+      rel="icon"
+      href="https://cdn3.iconfinder.com/data/icons/cat-power-premium/120/cat_hungry-256.png"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background-color: #7c707094;
+      }
+      .header {
+        position: fixed;
+        top: 0;
+        background-color: #29577c;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        z-index: 10;
+        padding-top: 2rem;
+        border-bottom: 2px solid #00ccff;
+      }
+      .main {
+        margin-top: 200px;
+      }
+      #inputArr,
+      .output {
+        min-height: 2.5rem;
+      }
+      button {
+        opacity: 0.9;
+        transition-duration: 0.3s;
+        font-weight: 500;
+        min-width: 100px;
+      }
+      button:hover {
+        opacity: 1;
+        background-color: #24d12d;
+        /* color: rgb(253, 175, 74); */
+        box-shadow: 0 0 4px 2px #cccc;
+      }
+      .switch_loc {
+        max-width: 7rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header text-center">
+      <h3 class="fs-2 text-warning">Bài tập JS buổi 18</h3>
+      <div class="text-center">
+        <p class="fs-5 mb-2 text-info">Nhập vào giá trị cho mảng</p>
+        <input
+          id="input"
+          class="rounded-2 ps-3 py-1 fs-5"
+          type="number"
+          placeholder="nhập số"
+        />
+        <button
+          id="insertNumber"
+          class="rounded-2 bg-success px-3 py-1 text-light fw-semibold fs-5 ms-2 mb-2"
+        >
+          NHẬP
+        </button>
+        <button
+          id="removeNumber"
+          class="rounded-2 bg-danger px-3 py-1 text-warning fw-semibold fs-5 ms-2 mb-2"
+        >
+          XÓA MẢNG
+        </button>
+        <p id="inputArr" class="fs-3 text-warning font-monospace"></p>
+      </div>
+    </header>
+    <main class="main container py-5 px-4 bg-secondary w-75">
+      <!-- <main> -->
+      <!-- <div class="text-center">
+          <p class="fs-5 text-info">Nhập vào giá trị cho mảng</p>
+          <input
+            id="input"
+            class="rounded-2 ps-3 py-1 fs-4"
+            type="number"
+            placeholder="nhập số"
+          />
+          <button
+            id="insertNumber"
+            class="rounded-2 bg-success px-3 py-1 text-light fw-semibold fs-4 ms-2 mb-2"
+          >
+            NHẬP
+          </button>
+          <button
+            id="removeNumber"
+            class="rounded-2 bg-danger px-3 py-1 text-warning fw-semibold fs-4 ms-2 mb-2"
+          >
+            XÓA MẢNG
+          </button>
+          <p id="inputArr" class="fs-3 text-warning font-monospace"></p>
+          <hr />
+        </div> -->
+      <!-- <section> -->
+      <!-- Tính tổng các số dương -->
+      <div class="ex1 fs-5 mb-4">
+        <p class="mb-2">1. Tính tổng các số dương trong mảng.</p>
+        <button onclick="exam1()" class="rounded-2 me-3">Tính</button>
+        <span id="ex1Result" class="text-warning fw-semibold">----</span>
+      </div>
+      <!-- Đếm số lượng số dương -->
+      <div class="ex2 fs-5 mb-4">
+        <hr />
+        <p class="mb-2">2. Đếm có bao nhiêu số dương trong mảng.</p>
+        <button onclick="exam2()" class="rounded-2 me-3">Kết quả</button>
+        <span id="ex2Result" class="text-warning fw-semibold">----</span>
+      </div>
+      <!-- Tìm số nhỏ nhất trong mảng -->
+      <div class="ex3 fs-5 mb-4">
+        <hr />
+        <p class="mb-2">3. Tìm số nhỏ nhất trong mảng.</p>
+        <button onclick="exam3()" class="rounded-2 me-3">Tìm Min</button>
+        <span id="ex3Result" class="text-warning fw-semibold">----</span>
+      </div>
+      <!-- Tìm số dương nhỏ nhất trong mảng -->
+      <div class="ex4 fs-5 mb-4">
+        <hr />
+        <p class="mb-2">4. Tìm số dương nhỏ nhất trong mảng.</p>
+        <button onclick="exam4()" class="rounded-2 me-3">Tìm Min</button>
+        <span id="ex4Result" class="text-warning fw-semibold">----</span>
+      </div>
+      <!-- Tìm số chẵn cuối cùng trong mảng. Nếu mảng không có giá trị chẵn thì trả về -1. -->
+      <div class="ex5 fs-5 mb-4">
+        <hr />
+        <p class="mb-2">5. Tìm số chẵn cuối cùng trong mảng</p>
+        <button onclick="exam5()" class="rounded-2 me-3">Kết quả</button>
+        <span id="ex5Result" class="text-warning fw-semibold">----</span>
+      </div>
+      <!-- Đổi chỗ 2 giá trị trong mảng theo vị trí  -->
+      <div class="ex6 fs-5 mb-4">
+        <hr />
+        <p class="mb-2">6. Đổi chỗ hai số trong mảng.</p>
+        <div class="mb-3 text-center">
+          <p class="mb-2 text-white fst-italic">Nhập hai vị trí muốn đổi chỗ</p>
+          <input
+            id="location1"
+            class="text-primary ps-2 mx-3 rounded-4 text-center switch_loc"
+            type="number"
+            placeholder="Vị trí 1"
+          />
+          <input
+            id="location2"
+            class="text-danger ps-2 mx-3 rounded-4 text-center switch_loc"
+            type="number"
+            placeholder="Vị trí 2"
+          />
+          <button onclick="exam6()" class="rounded-2 px-4 mx-3">
+            Mảng mới
+          </button>
+        </div>
+        <p
+          id="ex6Result"
+          class="fs-3 text-white fw-semibold text-center font-monospace"
+        ></p>
+      </div>
+      <!-- Sắp xếp tăng dần -->
+      <div class="ex7 fs-5 mb-4">
+        <hr />
+        <p class="mb-2">7. Sắp xếp giá trị trong mảng tăng dần</p>
+        <button onclick="exam7()" class="rounded-2 px-4 mb-4">Mảng mới</button>
+        <p
+          id="ex7Result"
+          class="fs-3 text-white fw-semibold text-center font-monospace"
+        ></p>
+      </div>
+      <!-- Tìm số nguyên tố đầu tiên trong mảng -->
+      <div class="ex8 fs-5 mb-4">
+        <hr />
+        <p class="mb-2">8. Tìm số nguyên tố đầu tiên trong mảng</p>
+        <button onclick="exam8()" class="rounded-2 me-3">Kết quả</button>
+        <span id="ex8Result" class="text-warning fw-semibold">----</span>
+      </div>
+      <!-- Đếm số nguyên có trong mảng mới-->
+      <div class="ex9 fs-5 mb-4">
+        <hr />
+        <p class="mb-2">
+          9. <span class="text-danger fst-italic">Thêm 1 mảng số thực </span> và
+          sau đó đếm số nguyên trong mảng
+        </p>
+        <div class="mb-2">
+          <input
+            id="numberInsert"
+            class="ps-2"
+            type="number"
+            placeholder="thêm số "
+          />
+          <button id="insertUninteger" class="bg-primary">Thêm</button>
+          <button id="delnewArrExam9" class="bg-warning">Xóa mảng</button>
+          <p
+            id="insertedArray"
+            class="output mt-2 fs-3 text-warning text-center font-monospace"
+          ></p>
+        </div>
+        <button onclick="exam9()" class="rounded-2 me-3">Đếm số nguyên</button>
+        <span id="ex9Result" class="text-warning fw-semibold">----</span>
+      </div>
+      <!-- So sánh số lượng số âm và số dương -->
+      <div class="ex10 fs-5 mb-5">
+        <hr />
+        <p class="mb-2">10. Đếm số dương và số âm</p>
+        <button onclick="exam10()" class="rounded-2 me-3">Kết quả</button>
+        <span id="ex10Result" class="text-warning fw-semibold">----</span>
+      </div>
+      <!-- </section> -->
+      <!-- </main> -->
+    </main>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
