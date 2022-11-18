@@ -151,6 +151,7 @@ function exam8() {
   if (arrInput.length == 0) {
     alert("Mảng rỗng");
     document.getElementById("ex8Result").innerHTML = -1;
+    return;
   }
   for (var i = 0; i <= arrInput.length - 1; i++) {
     var number = arrInput[i];
